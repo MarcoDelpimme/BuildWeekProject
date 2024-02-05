@@ -1,0 +1,44 @@
+body {
+  margin-inline: 10rem;
+  padding: 0;
+  box-sizing: border-box;
+  background-image: url(/assets/bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+#logosvg {
+  width: 15%;
+  padding-top: 5rem;
+}
+
+h1 {
+  font-family: "Outfit", sans-serif;
+  font-size: 60px;
+  color: #ffffff;
+}
+
+p {
+  font-size: 16px;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+
+ul {
+  font-size: 16px;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+
+.button-page1 {
+}
+
+.button-questions {
+}
+
+.button-page3 {
+}
+
+.button-page4 {
+}
