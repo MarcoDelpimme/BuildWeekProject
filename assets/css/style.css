@@ -103,11 +103,50 @@ ul {
 .divpg2 {
   font-size: 65px;
   color: white;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  padding-bottom: 50px;
+}
+
+#container-questions {
+  text-align: center;
+  margin-block: 12rem;
+  font-size: 50px;
+  color: white;
+  font-family: "outfit", sans-serif;
 }
 
 label {
   color: white;
   border: solid white;
   padding-inline: 10px;
-  margin: 5px;
+  margin: 10px;
+  border: solid 3px;
+  padding: 10px;
+
+  transition-duration: 0.3s;
+  cursor: pointer;
+  background-color: #ffffff33;
+  font-family: "Outfit", sans-serif;
+  margin-inline: 10px;
+  border-radius: 30px;
+  border-style: outset;
+}
+
+label:hover {
+  background-color: #c2128d;
+}
+
+.inputpg2 {
+  display: none;
+}
+
+.formpg2 {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: stretch;
+  font-weight: bold;
+  font-size: 20px;
 }

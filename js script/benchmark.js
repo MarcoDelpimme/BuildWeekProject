@@ -12,7 +12,7 @@ const questions = [
     type: "multiple",
     difficulty: "easy",
     question:
-      "In the programming language Java, which of these keywords would you put on a variable to make sure it doesn&#039;t get modified?",
+      "In the programming language Java, which of these keywords would you put on a variable to make sure it doesnt get modified?",
     correct_answer: "Final",
     incorrect_answers: ["Static", "Private", "Public"],
   },
@@ -83,25 +83,48 @@ const questions = [
 ];
 
 // window.onload = function () {};
-
 const container = document.getElementById("container-questions");
-questions.forEach((obj) => {
+let indexQuestion = 0;
+let indexPage = 1;
+
+function questionStep() {
+  const obj = questions[indexQuestion];
+  container.innerHTML = "";
   const question = document.createElement("div");
   question.classList.add("divpg2");
   question.textContent = obj.question;
   container.appendChild(question);
 
+  const form = document.createElement("form");
+  form.classList.add("formpg2");
+
   const options = obj.incorrect_answers.concat(obj.correct_answer);
   options.forEach((option) => {
     const label = document.createElement("label");
     const radio = document.createElement("input");
+    radio.classList.add("inputpg2");
     radio.type = "radio";
     radio.name = obj.question;
     radio.value = option;
 
-    label.appendChild(radio);
+    radio.addEventListener("change", function () {
+      nextQuestion();
+    });
     label.innerText = option;
-
-    container.appendChild(label);
+    label.appendChild(radio);
+    form.appendChild(label);
   });
-});
+  container.appendChild(form);
+}
+
+function nextQuestion() {
+  indexQuestion++;
+  if (indexQuestion < questions.length) {
+    indexPage++;
+    questionStep();
+  } else {
+    container.innerHTML = "QUIZ COMPLETATO!";
+  }
+}
+
+questionStep();
