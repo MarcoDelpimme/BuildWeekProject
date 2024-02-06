@@ -116,7 +116,7 @@ ul {
   font-family: "outfit", sans-serif;
 }
 
-label {
+.inputpg2 {
   color: white;
   border: solid white;
   padding-inline: 10px;
@@ -133,12 +133,8 @@ label {
   border-style: outset;
 }
 
-label:hover {
+.inputpg2:hover {
   background-color: #c2128d;
-}
-
-.inputpg2 {
-  display: none;
 }
 
 .formpg2 {
@@ -149,4 +145,62 @@ label:hover {
   align-content: stretch;
   font-weight: bold;
   font-size: 20px;
+}
+
+/* ____________________TIMER PIE CSS________________________________ */
+#timer {
+  color: white;
+}
+
+.base-timer {
+  position: relative;
+  width: 220px;
+  height: 220px;
+}
+
+.base-timer__svg {
+  transform: scaleX(-1);
+}
+
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+.base-timer__path-elapsed {
+  stroke-width: 7px;
+  stroke: grey;
+}
+
+.base-timer__path-remaining {
+  stroke-width: 7px;
+  stroke-linecap: round;
+  transform: rotate(90deg);
+  transform-origin: center;
+  transition: 1s linear all;
+  fill-rule: nonzero;
+  stroke: currentColor;
+}
+
+.base-timer__path-remaining.green {
+  color: rgb(65, 184, 131);
+}
+
+.base-timer__path-remaining.orange {
+  color: orange;
+}
+
+.base-timer__path-remaining.red {
+  color: red;
+}
+
+.base-timer__label {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
 }
