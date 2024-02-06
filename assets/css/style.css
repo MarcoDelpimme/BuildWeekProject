@@ -8,6 +8,10 @@ body {
   height: 100vh;
 }
 
+header {
+  height: 80px;
+}
+
 #logosvg {
   width: 20%;
   padding-top: 2rem;
@@ -107,6 +111,10 @@ ul {
   font-weight: 700;
   padding-bottom: 50px;
 }
+.divInputPg2 {
+  display: inline-block;
+  width: 50%;
+}
 
 #container-questions {
   text-align: center;
@@ -131,6 +139,7 @@ ul {
   margin-inline: 10px;
   border-radius: 30px;
   border-style: outset;
+  width: 50%;
 }
 
 .inputpg2:hover {
@@ -152,10 +161,17 @@ ul {
   color: white;
 }
 
+#base-time-label {
+  color: white;
+}
+
 .base-timer {
   position: relative;
-  width: 220px;
-  height: 220px;
+  width: 130px;
+  height: 130px;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
 }
 
 .base-timer__svg {
@@ -168,7 +184,7 @@ ul {
 }
 
 .base-timer__path-elapsed {
-  stroke-width: 7px;
+  stroke-width: 10px;
   stroke: grey;
 }
 
@@ -196,11 +212,15 @@ ul {
 
 .base-timer__label {
   position: absolute;
-  width: 220px;
-  height: 220px;
+  width: 130px;
+  height: 130px;
   top: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 48px;
+  font-size: 35px;
+}
+
+#app {
+  text-align: -webkit-right;
 }
