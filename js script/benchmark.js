@@ -81,50 +81,193 @@ const questions = [
     incorrect_answers: ["Python", "C", "Jakarta"],
   },
 ];
+const COLOR_CODES = {
+  info: {
+    color: "green",
+  },
+  warning: {
+    color: "orange",
+    threshold: 10,
+  },
+  alert: {
+    color: "red",
+    threshold: 5,
+  },
+};
 
-// window.onload = function () {};
-const container = document.getElementById("container-questions");
+const THE_LIMIT = 60; //timer
+const TIME_LIMIT = 60; //timer
+
+const container = document.getElementById("container-questions"); //container question
 let indexQuestion = 0;
-let indexPage = 1;
+let quizCompleted = false;
+let timePassed = 0; //timer
+let timeLeft = THE_LIMIT; // Tempo iniziale
+let timerInterval = null; //timer
+let remainingPathColor = COLOR_CODES.info.color; //timer
 
+//reset del background quando cambi risposta
+function cleanse() {
+  const buttons = document.querySelectorAll(".inputpg2");
+  buttons.forEach((button) => {
+    button.style.backgroundColor = "";
+  });
+}
+//randomizza ordine risposte
+function shuffleQuestion(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// funzione generale per creazione dei div con button interni
 function questionStep() {
   const obj = questions[indexQuestion];
   container.innerHTML = "";
   const question = document.createElement("div");
   question.classList.add("divpg2");
-  question.textContent = obj.question;
+  question.innerText = obj.question;
   container.appendChild(question);
 
   const form = document.createElement("form");
   form.classList.add("formpg2");
-
+  // concatenazione di risposte correte e incorrette
   const options = obj.incorrect_answers.concat(obj.correct_answer);
+  shuffleQuestion(options);
   options.forEach((option) => {
-    const label = document.createElement("label");
-    const radio = document.createElement("input");
-    radio.classList.add("inputpg2");
-    radio.type = "radio";
-    radio.name = obj.question;
-    radio.value = option;
+    const div = document.createElement("div");
+    const button = document.createElement("button");
+    button.classList.add("inputpg2");
 
-    radio.addEventListener("change", function () {
-      nextQuestion();
+    button.innerText = option;
+    button.addEventListener("click", function () {
+      selectAnswer(option, button);
     });
-    label.innerText = option;
-    label.appendChild(radio);
-    form.appendChild(label);
+
+    div.appendChild(button);
+    container.appendChild(div);
   });
-  container.appendChild(form);
+}
+//funzione per selezione della risposta
+function selectAnswer(option, button) {
+  cleanse();
+  button.style.backgroundColor = "#c2128d";
 }
 
+//funzione prossima domanda che scala con indice -- inserito parametri timer che si resettano tramite valore booleano
 function nextQuestion() {
   indexQuestion++;
+  quizCompleted = false;
   if (indexQuestion < questions.length) {
-    indexPage++;
     questionStep();
+    clearInterval(timerInterval);
+    timePassed = 0; // Reimposta il tempo trascorso
+    timeLeft = THE_LIMIT; // Reimposta il tempo rimasto
+    document.getElementById("base-timer-label").innerHTML = formatTime(timeLeft);
+    setCircleDasharray();
+    setRemainingPathColor(timeLeft);
+    startTimer(); // Avvia il nuovo timer
   } else {
     container.innerHTML = "QUIZ COMPLETATO!";
+    clearInterval(timerInterval);
   }
 }
 
+//timer interno funzione
+
+function formatTime(time) {
+  const minutes = Math.floor(time / 60);
+  let seconds = time % 60;
+
+  if (seconds < 10) {
+    seconds = `0${seconds}`;
+  }
+
+  return `${minutes}:${seconds}`;
+}
+
+//bottone per cambio di domanda
+const nextQuestionBtn = document.getElementById("next-question-btn");
+nextQuestionBtn.addEventListener("click", function () {
+  nextQuestion();
+});
+
+const FULL_DASH_ARRAY = 283;
+const WARNING_THRESHOLD = 15;
+const ALERT_THRESHOLD = 5;
+
+//variazione del colore in base al tempo
+function setRemainingPathColor(timeLeft) {
+  const { alert, warning, info } = COLOR_CODES;
+  const pathElement = document.getElementById("base-timer-path-remaining");
+
+  pathElement.classList.remove(alert.color, warning.color, info.color);
+
+  if (timeLeft <= alert.threshold) {
+    pathElement.classList.add(alert.color);
+  } else if (timeLeft <= warning.threshold) {
+    pathElement.classList.add(warning.color);
+  } else {
+    pathElement.classList.add(info.color);
+  }
+}
+
+//calcolo frazioni di tempo
+function calculateTimeFraction() {
+  const rawTimeFraction = timeLeft / TIME_LIMIT;
+  return rawTimeFraction - (1 / THE_LIMIT) * (1 - rawTimeFraction);
+}
+
+//array 60 secondi
+function setCircleDasharray() {
+  const circleDasharray = `${(calculateTimeFraction() * FULL_DASH_ARRAY).toFixed(0)} 283`;
+  document.getElementById("base-timer-path-remaining").setAttribute("stroke-dasharray", circleDasharray);
+}
+
+// timer start
+function startTimer() {
+  timerInterval = setInterval(() => {
+    timePassed = timePassed += 1;
+    timeLeft = THE_LIMIT - timePassed;
+    document.getElementById("base-timer-label").innerHTML = formatTime(timeLeft);
+    setCircleDasharray();
+    setRemainingPathColor(timeLeft);
+
+    if (timeLeft === 0) {
+      onTimesUp();
+    }
+  }, 1000);
+}
+
+function onTimesUp() {
+  clearInterval(timerInterval);
+  nextQuestion();
+}
+
+document.getElementById("app").innerHTML = `
+    <div class="base-timer">
+      <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+        <g class="base-timer__circle">
+          <circle class="base-timer__path-elapsed" cx="50" cy="50" r="45"></circle>
+          <path
+            id="base-timer-path-remaining"
+            stroke-dasharray="283"
+            class="base-timer__path-remaining ${remainingPathColor}"
+            d="
+              M 50, 50
+              m -45, 0
+              a 45,45 0 1,0 90,0
+              a 45,45 0 1,0 -90,0
+            "
+          ></path>
+        </g>
+      </svg>
+      <span id="base-timer-label" class="base-timer__label">${formatTime(timeLeft)}</span>
+    </div>
+    `;
+
+startTimer();
 questionStep();
+setRemainingPathColor(timeLeft);
+setCircleDasharray();
