@@ -135,8 +135,11 @@ function questionStep() {
   // concatenazione di risposte correte e incorrette
   const options = obj.incorrect_answers.concat(obj.correct_answer);
   shuffleQuestion(options);
+  const divAll = document.createElement("div");
+  divAll.classList.add("divAll");
   options.forEach((option) => {
     const div = document.createElement("div");
+    div.classList.add("divInputPg2");
     const button = document.createElement("button");
     button.classList.add("inputpg2");
 
@@ -146,7 +149,8 @@ function questionStep() {
     });
 
     div.appendChild(button);
-    container.appendChild(div);
+    container.appendChild(divAll);
+    divAll.appendChild(div);
   });
 }
 //funzione per selezione della risposta
