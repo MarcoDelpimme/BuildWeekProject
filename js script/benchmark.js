@@ -82,6 +82,7 @@ const questions = [
   },
 ];
 
+//DEFINISCO DEI COLORI E SOGLIA PER IL TIMER
 const COLOR_CODES = {
   info: {
     color: "green",
@@ -95,11 +96,14 @@ const COLOR_CODES = {
     threshold: 5,
   },
 };
-
+//LIMITE DI TEMPO PER IL TIMER
 const THE_LIMIT = 60; //timer
+//LIMIT TEMPO COMPLESSIVO DEL QUIZ
 const TIME_LIMIT = 60; //timer
-
+//OTTENGO  IL CONTAINER DELLE DOMANDE + RISP DA INSERIRE
 const container = document.getElementById("container-questions"); //container question
+//___________________________
+// DICHIARO VARIABILI DI STATO PER GESTIRE LO STATO DEL QUIZ E DEL TIMER
 let indexQuestion = 0;
 let quizCompleted = false;
 let timePassed = 0; //timer
@@ -108,6 +112,7 @@ let timerInterval = null; //timer
 let remainingPathColor = COLOR_CODES.info.color; //timer
 let currentSelectedAnswer = null;
 
+//FUNZIONE PER GESTIRE GLI STEP DI UNA DOMANDA PER DOMANDA
 function questionStep() {
   const obj = questions[indexQuestion];
   container.innerHTML = "";
@@ -139,7 +144,7 @@ function questionStep() {
     divAll.appendChild(div);
   });
 }
-
+//FUNZIONE PER MESCOLARE LE DOMANDE (RANDOMIZZAZIONE TRAMITE SHUFFLE)
 function shuffleQuestion(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -147,6 +152,7 @@ function shuffleQuestion(array) {
   }
 }
 
+//FUNZIONE CHIAMATA QUANDO SI PASSA ALLA PROSSIMA DOMANDA
 function nextQuestion() {
   let selectedAnswer = null;
   indexQuestion++;
@@ -163,6 +169,7 @@ function nextQuestion() {
     setRemainingPathColor(timeLeft);
     startTimer();
   } else {
+    //QUANDO NON TROVA PIU DOMANDE GENERO IL RESULT DEL TEST GENERANDO UN GRAFICO A TORTA CON LA FUNZIONE GENERATEPIECHART(RICHIAMATE)
     const lastPage = document.getElementById("lastpage");
     container.style.display = "none";
     const timer = document.getElementById("app");
@@ -180,15 +187,18 @@ function nextQuestion() {
   }
 }
 
+//GESTIONE DEL CLICK SUL PULSANTE PROSSIMA DOMANDA
 const nextQuestionBtn = document.getElementById("next-question-btn");
 nextQuestionBtn.addEventListener("click", function () {
   dataAnswer(null);
   nextQuestion();
 });
 
+//ARRAY PER REGISTRARE LE RISPOSTE CORRETTE O SCORRETTE
 const wrong = [];
 const correct = [];
 
+//FUNZIONE CHIAMATA QUANDO SI SELEZIONA UNA RISPOSTA
 function selectAnswer(option, button) {
   if (quizCompleted || timeLeft === 0) {
     return;
@@ -207,14 +217,14 @@ function selectAnswer(option, button) {
   button.style.backgroundColor = "#c2128d";
   currentSelectedAnswer = option;
 }
-
+//FUNZIONE CHE RIPRISTINA LO STATO SLEZIONATO (COLORE) DELLA RISPOSTA SELEZIONATA
 function cleanse() {
   const buttons = document.querySelectorAll(".inputpg2");
   buttons.forEach((button) => {
     button.style.backgroundColor = "";
   });
 }
-
+//FUNZIONE PER REGISTRARE I DATI DELLA RISPOSTA DATA DALL'UTENTE
 function dataAnswer() {
   console.log("selected question", currentSelectedAnswer);
   const currentQuestion = questions[indexQuestion];
@@ -234,14 +244,14 @@ function dataAnswer() {
   console.log("correct", correct);
   console.log("wrong", wrong);
 }
-
+//FUNZIONE CHE SI AVVIA QUANDO SCADE IL TEMPO
 function onTimesUp() {
   clearInterval(timerInterval);
   quizCompleted = true;
   nextQuestion();
   dataAnswer(null);
 }
-
+//FUNZIONE CHE GENERA IL GRAFICO A TORTA ALLA FINE DEL QUIZ NEL ELSE DELLA FUNZIONE NEXTQUESTION
 function generatePieChart() {
   const totalQuestions = questions.length;
   const answeredQuestions = correct.length + wrong.length;
@@ -287,7 +297,7 @@ function generatePieChart() {
   anchor.href = "../feedback.html";
   anchor.appendChild(buttonInput);
   buttonpage2.appendChild(anchor);
-
+  //CHART DEL GRAFICO A TORTA FINE DEL QUIZ
   var chrt = document.getElementById("chartId").getContext("2d");
   var chartId = new Chart(chrt, {
     type: "doughnut",
@@ -306,7 +316,7 @@ function generatePieChart() {
     },
   });
 }
-
+//CREAZIONE DEL TIMER NEL DOCUMENTO
 document.getElementById("app").innerHTML = `
     <div class="base-timer">
       <svg class="base-timer__svg" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
@@ -328,7 +338,7 @@ document.getElementById("app").innerHTML = `
       <span id="base-timer-label" class="base-timer__label">${formatTime(timeLeft)}</span>
     </div>
     `;
-
+//FUNZIONE PER FORMATTARE IL TEMPO RIMANENTE IN UN FORMATO LEGGIBILE
 function formatTime(time) {
   const minutes = Math.floor(time / 60);
   let seconds = time % 60;
@@ -343,7 +353,7 @@ function formatTime(time) {
 const FULL_DASH_ARRAY = 283;
 const WARNING_THRESHOLD = 15;
 const ALERT_THRESHOLD = 5;
-
+//SETTA IL PERCORSO DEL COLORE
 function setRemainingPathColor(timeLeft) {
   const { alert, warning, info } = COLOR_CODES;
   const pathElement = document.getElementById("base-timer-path-remaining");
@@ -358,17 +368,17 @@ function setRemainingPathColor(timeLeft) {
     pathElement.classList.add(info.color);
   }
 }
-
+//CALCOLA  LA FRAZIONE DI TEMPO TRASCORSO
 function calculateTimeFraction() {
   const rawTimeFraction = timeLeft / TIME_LIMIT;
   return rawTimeFraction - (1 / THE_LIMIT) * (1 - rawTimeFraction);
 }
-
+//FUNZIONE RELATIVA AL PERCORSO DEL CERCHIO
 function setCircleDasharray() {
   const circleDasharray = `${(calculateTimeFraction() * FULL_DASH_ARRAY).toFixed(0)} 283`;
   document.getElementById("base-timer-path-remaining").setAttribute("stroke-dasharray", circleDasharray);
 }
-
+//AVVIO DEL TIMER
 function startTimer() {
   timerInterval = setInterval(() => {
     timePassed = timePassed += 1;
@@ -383,7 +393,8 @@ function startTimer() {
   }, 1000);
 }
 
-startTimer();
-questionStep();
+startTimer(); //AVVIO IL TIMER ALL INIZIO DEL QUIZ
+questionStep(); //PARTE LA PRESENZATIONE CON LA PRIMA DOMANDA
+//IMPOSTAZIONE DEL COLORE DEL PERCORSO RIMANENTE
 setRemainingPathColor(timeLeft);
 setCircleDasharray();
