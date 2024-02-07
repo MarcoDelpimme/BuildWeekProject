@@ -150,9 +150,12 @@ function questionStep() {
   });
 }
 //funzione per selezione della risposta
+const wrong = [];
+const correct = [];
 function selectAnswer(option, button) {
   cleanse();
   button.style.backgroundColor = "#c2128d";
+  dataAnswer(option);
 }
 
 //funzione prossima domanda che scala con indice -- inserito parametri timer che si resettano tramite valore booleano
@@ -169,8 +172,15 @@ function nextQuestion() {
     setRemainingPathColor(timeLeft);
     startTimer(); // Avvia il nuovo timer
   } else {
-    container.innerHTML = "QUIZ COMPLETATO!";
+    const lastPage = document.getElementById("lastpage");
+    container.style.display = "none";
+    const timer = document.getElementById("app");
+    timer.style.display = "none";
+    const buttonNext = document.getElementById("next-question-btn");
+    buttonNext.style.display = "none";
+    lastPage.innerHTML = `<canvas id="myChart" width="400" height="400"></canvas>`;
     clearInterval(timerInterval);
+    generatePieChart();
   }
 }
 
@@ -190,6 +200,7 @@ function formatTime(time) {
 //bottone per cambio di domanda
 const nextQuestionBtn = document.getElementById("next-question-btn");
 nextQuestionBtn.addEventListener("click", function () {
+  dataAnswer(null);
   nextQuestion();
 });
 
@@ -240,9 +251,49 @@ function startTimer() {
   }, 1000);
 }
 
+function dataAnswer(selectedQuestion) {
+  const currentQuestion = questions[indexQuestion];
+  console.log(currentQuestion);
+  console.log(selectedQuestion);
+
+  const answerData = {
+    question: currentQuestion.question,
+    selectedQuestion: selectedQuestion,
+    correct_answer: currentQuestion.correct_answer,
+  };
+  if (selectedQuestion === currentQuestion.correct_answer) {
+    correct.push(answerData);
+    console.log("TRUE");
+  } else {
+    wrong.push(answerData);
+    console.log("FALSE");
+  }
+}
+
 function onTimesUp() {
   clearInterval(timerInterval);
+  dataAnswer(null);
   nextQuestion();
+}
+
+function generatePieChart() {
+  const totalQuestions = questions.length;
+  const correctPercentage = (correct.length / totalQuestions) * 100;
+  const wrongPercentage = (wrong.length / totalQuestions) * 100;
+
+  const ctx = document.getElementById("myChart").getContext("2d");
+  const myChart = new Chart(ctx, {
+    type: "pie",
+    data: {
+      labels: ["Corrette", "Sbagliate"],
+      datasets: [
+        {
+          data: [correctPercentage, wrongPercentage],
+          backgroundColor: ["green", "red"],
+        },
+      ],
+    },
+  });
 }
 
 document.getElementById("app").innerHTML = `
