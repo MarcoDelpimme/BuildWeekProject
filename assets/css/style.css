@@ -10,6 +10,7 @@ body {
 
 header {
   height: 80px;
+  margin-bottom: 4rem;
 }
 
 #logosvg {
@@ -83,6 +84,8 @@ ul {
 
 .container-btn1 {
   display: inline-block;
+  width: 125%;
+  text-align: center;
 }
 .container-btn1 a {
   text-decoration: none;
@@ -94,7 +97,6 @@ ul {
   padding-block: 18px;
   padding-inline: 55px;
   font-size: 25px;
-  background-color: #00ffff;
   cursor: pointer;
   font-weight: 700;
   border: none;
