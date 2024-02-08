@@ -13,7 +13,7 @@ header {
 }
 
 #logosvg {
-  width: 20%;
+  width: 130px;
   padding-top: 2rem;
   padding-bottom: 4rem;
 }
@@ -264,7 +264,7 @@ ul {
   text-align: center;
   color: white;
   margin-top: -45px;
-  margin-bottom: 50px;
+  margin-bottom: 40px;
   font-family: "Outfit", sans-serif;
 }
 
@@ -277,13 +277,19 @@ ul {
 }
 
 #result-message {
-  margin-top: -12em;
+  margin-top: -13em;
   text-align: center;
+}
+#result-message p {
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 15px;
+  margin-bottom: -10px;
 }
 
 #corretto {
   margin-top: -80px;
-  margin-left: 20em;
+  margin-left: 3em;
 }
 
 #corretto p {
@@ -293,8 +299,8 @@ ul {
 
 #sbagliato {
   text-align: right;
-  margin-top: -77px;
-  margin-right: 20em;
+  margin-top: -80px;
+  margin-right: 5em;
 }
 
 #sbagliato p {
@@ -305,18 +311,18 @@ ul {
 .wrongpercent {
   color: white;
   text-align: right;
-  margin-top: -11px;
+  margin-top: -40px;
   font-size: 30px;
   margin-left: 65px;
   font-size: 70px;
   font-family: "Outfit", sans-serif;
   font-weight: bold;
-  margin-right: 300px;
+  margin-right: 75px;
 }
 
 .correctpercent {
   color: white;
-  margin-top: -10px;
+  margin-top: -40px;
   font-size: 30px;
   position: absolute;
   color: white;
@@ -324,7 +330,7 @@ ul {
   font-size: 70px;
   font-family: "Outfit", sans-serif;
   font-weight: bold;
-  margin-left: 360px;
+  margin-left: 100px;
 }
 
 #container-btn2 {

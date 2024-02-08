@@ -277,20 +277,30 @@ function generatePieChart() {
   if (correctPercentage <= 60) {
     const containerResult = document.getElementById("result-message");
     const p = document.createElement("p");
-
-    p.innerText = "Hai fallito il test";
-    p.style.color = "#df3232";
+    p.innerText = "I'M SORRY ";
+    p.style.color = "white";
     p.style.fontFamily = "Outfit";
 
+    const p2 = document.createElement("p");
+    p2.innerText = "you failed the test";
+    p2.style.color = "#df3232";
+    p2.style.fontFamily = "Outfit";
+
     containerResult.appendChild(p);
+    containerResult.appendChild(p2);
   } else {
     const containerResult = document.getElementById("result-message");
     const p = document.createElement("p");
 
-    p.innerText = "Hai superato il test";
+    p.innerText = "CONGRATULATIONS!";
     p.style.color = "#00ffff";
 
+    const p3 = document.createElement("p");
+    p3.innerText = "You passed the exam";
+    p3.style.color = "white";
+
     containerResult.appendChild(p);
+    containerResult.appendChild(p3);
   }
 
   // creazione titolo
