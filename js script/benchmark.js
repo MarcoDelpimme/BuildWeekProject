@@ -248,8 +248,20 @@ function dataAnswer() {
 function onTimesUp() {
   clearInterval(timerInterval);
   quizCompleted = true;
+
+  if (currentSelectedAnswer !== null) {
+    dataAnswer();
+  } else {
+    const currentQuestion = questions[indexQuestion];
+    const unansweredData = {
+      question: currentQuestion.question,
+      selectedQuestion: null,
+      correct_answer: currentQuestion.correct_answer,
+    };
+    wrong.push(unansweredData);
+  }
+
   nextQuestion();
-  dataAnswer(null);
 }
 //FUNZIONE CHE GENERA IL GRAFICO A TORTA ALLA FINE DEL QUIZ NEL ELSE DELLA FUNZIONE NEXTQUESTION
 
