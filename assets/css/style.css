@@ -10,6 +10,7 @@ body {
 
 header {
   height: 80px;
+  margin-bottom: 4rem;
 }
 
 #logosvg {
@@ -79,10 +80,13 @@ ul {
 .container-checkbox p {
   display: inline-block;
   font-weight: 700;
+  margin-bottom: 35px;
 }
 
 .container-btn1 {
   display: inline-block;
+  width: 125%;
+  text-align: center;
 }
 .container-btn1 a {
   text-decoration: none;
@@ -94,7 +98,6 @@ ul {
   padding-block: 18px;
   padding-inline: 55px;
   font-size: 25px;
-  background-color: #00ffff;
   cursor: pointer;
   font-weight: 700;
   border: none;
@@ -112,9 +115,7 @@ ul {
 }
 .divInputPg2 {
   display: inline-block;
-  width: 50%;
-  margin-right: -3em;
-  margin-left: -2em;
+  width: 35%;
 }
 
 #container-questions {
@@ -141,9 +142,9 @@ ul {
   margin-inline: 10px;
   border-radius: 30px;
   border-style: outset;
-  width: 50%;
+  width: 90%;
   padding-block: 15px;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .inputpg2:hover {
@@ -175,9 +176,16 @@ ul {
   border-style: outset;
   width: 20%;
   margin-left: 80%;
+  font-size: 17px;
 }
+
 #next-question-btn:hover {
   background-color: rgba(77, 9, 77, 0.192);
+}
+
+.material-symbols-outlined {
+  vertical-align: text-top;
+  font-size: 25px;
 }
 
 /* ____________________TIMER PIE CSS________________________________ */
@@ -355,4 +363,33 @@ ul {
   color: white;
   border: 3px solid white;
   box-shadow: 0px 0px 10px 0.5px #00ffff78;
+}
+
+#question-counter {
+  color: rgb(253 121 255);
+  text-align: center;
+  font-family: "Outfit", sans-serif;
+  font-weight: 400;
+  text-decoration: overline;
+  width: 26px;
+  height: 25px;
+  border: 2px solid violet;
+  border-radius: 5px;
+  appearance: none;
+  margin-bottom: -6px;
+}
+
+.checkbox:checked {
+  background-color: cyan;
+}
+
+.label {
+  font-size: 16px;
+  margin-left: 10px;
+  color: #706a6a;
+}
+
+.checkbox:checked + label {
+  color: #6c63ff;
+  font-weight: bold;
 }

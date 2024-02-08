@@ -97,9 +97,9 @@ const COLOR_CODES = {
   },
 };
 //LIMITE DI TEMPO PER IL TIMER
-const THE_LIMIT = 60; //timer
+const THE_LIMIT = 10; //timer
 //LIMIT TEMPO COMPLESSIVO DEL QUIZ
-const TIME_LIMIT = 60; //timer
+const TIME_LIMIT = 10; //timer
 //OTTENGO  IL CONTAINER DELLE DOMANDE + RISP DA INSERIRE
 const container = document.getElementById("container-questions"); //container question
 //___________________________
@@ -118,6 +118,9 @@ const correct = [];
 function questionStep() {
   const obj = questions[indexQuestion];
   container.innerHTML = "";
+  const questionCounter = document.getElementById("question-counter");
+  questionCounter.innerText = `Question ${indexQuestion + 1}/${questions.length}`;
+
   const question = document.createElement("div");
   question.classList.add("divpg2");
   question.innerText = obj.question;
@@ -156,12 +159,11 @@ function shuffleQuestion(array) {
 
 //FUNZIONE CHIAMATA QUANDO SI PASSA ALLA PROSSIMA DOMANDA
 function nextQuestion() {
-  let selectedAnswer = null;
   indexQuestion++;
   quizCompleted = false;
   currentSelectedAnswer = null;
   if (indexQuestion < questions.length) {
-    dataAnswer(selectedAnswer);
+    dataAnswer();
     questionStep();
     clearInterval(timerInterval);
     timePassed = 0;
@@ -178,21 +180,34 @@ function nextQuestion() {
     timer.style.display = "none";
     const buttonNext = document.getElementById("next-question-btn");
     buttonNext.style.display = "none";
+    const counter = document.getElementById("question-counter");
+    counter.style.display = "none";
     lastPage.innerHTML = `<canvas id="chartId" aria-label="chart" height="350" width="580"></canvas>`;
+    const resultCounter = document.getElementById("result-counter");
+    resultCounter.innerHTML = `<p>Correct Answers: <span id="correct-count">0</span></p>
+    <p>Incorrect Answers: <span id="incorrect-count">0</span></p>`;
     clearInterval(timerInterval);
     generatePieChart();
     wrong.length = 0;
     correct.length = 0;
   }
   if (!quizCompleted) {
-    dataAnswer(null);
+    dataAnswer();
   }
 }
 
 //GESTIONE DEL CLICK SUL PULSANTE PROSSIMA DOMANDA
 const nextQuestionBtn = document.getElementById("next-question-btn");
 nextQuestionBtn.addEventListener("click", function () {
-  dataAnswer(null);
+  if (currentSelectedAnswer === null) {
+    const answerData = {
+      question: questions[indexQuestion].question,
+      selectedQuestion: null,
+      correct_answer: questions[indexQuestion].correct_answer,
+    };
+    wrong.push(answerData);
+  }
+  dataAnswer();
   nextQuestion();
 });
 
@@ -204,6 +219,7 @@ function selectAnswer(option, button) {
     return;
   }
 
+  //questa condizione verifica che la risposta szelezionata non è  null esegue il codice all'interno
   if (currentSelectedAnswer !== null) {
     const prevSelectedButton = Array.from(document.querySelectorAll(".inputpg2")).find(
       (btn) => btn.innerText === currentSelectedAnswer
@@ -225,6 +241,7 @@ function cleanse() {
   });
 }
 //FUNZIONE PER REGISTRARE I DATI DELLA RISPOSTA DATA DALL'UTENTE
+//IN QUESTA FUNZIONE NULL VIENE PASSAATO COME ARGOMENTO QUANDO LA FUNZIONE VIENE CHIAMATA PERCHè DEVE GESTIRE IL CASO IN CUI NON VIENE SELEZIONATO NESSUNA RISPOSTA MI SERVE PER INDICARE CHE LA VARIABILE è INIZIALMENTE VUOTA O NON è ANCORA DEFINITA IN UN DETERMINATO PUNTO DEL FLUSSO
 function dataAnswer() {
   console.log("selected question", currentSelectedAnswer);
   const currentQuestion = questions[indexQuestion];
@@ -274,6 +291,14 @@ function generatePieChart() {
   const wrongPercentage = (wrong.length / totalQuestions) * 100;
 
   const realPercentageWrong = (unansweredQuestions / totalQuestions) * 100 + (wrong.length / totalQuestions) * 100;
+
+  //counter finale-------------------------------
+  const correctCountElement = document.getElementById("correct-count");
+  const incorrectCountElement = document.getElementById("incorrect-count");
+
+  correctCountElement.innerText = correct.length;
+  incorrectCountElement.innerText = wrong.length;
+  //-----------------------------------------------
   if (correctPercentage <= 60) {
     const containerResult = document.getElementById("result-message");
     const p = document.createElement("p");
@@ -443,9 +468,10 @@ function startTimer() {
     }
   }, 1000);
 }
-
-startTimer(); //AVVIO IL TIMER ALL INIZIO DEL QUIZ
-questionStep(); //PARTE LA PRESENZATIONE CON LA PRIMA DOMANDA
-//IMPOSTAZIONE DEL COLORE DEL PERCORSO RIMANENTE
-setRemainingPathColor(timeLeft);
-setCircleDasharray();
+window.onload = function () {
+  startTimer(); //AVVIO IL TIMER ALL INIZIO DEL QUIZ
+  questionStep(); //PARTE LA PRESENZATIONE CON LA PRIMA DOMANDA
+  //IMPOSTAZIONE DEL COLORE DEL PERCORSO RIMANENTE
+  setRemainingPathColor(timeLeft);
+  setCircleDasharray();
+};
