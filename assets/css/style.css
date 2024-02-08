@@ -112,9 +112,7 @@ ul {
 }
 .divInputPg2 {
   display: inline-block;
-  width: 50%;
-  margin-right: -3em;
-  margin-left: -2em;
+  width: 35%;
 }
 
 #container-questions {
@@ -141,9 +139,9 @@ ul {
   margin-inline: 10px;
   border-radius: 30px;
   border-style: outset;
-  width: 50%;
+  width: 90%;
   padding-block: 15px;
-  font-size: 20px;
+  font-size: 30px;
 }
 
 .inputpg2:hover {
@@ -175,9 +173,16 @@ ul {
   border-style: outset;
   width: 20%;
   margin-left: 80%;
+  font-size: 17px;
 }
+
 #next-question-btn:hover {
   background-color: rgba(77, 9, 77, 0.192);
+}
+
+.material-symbols-outlined {
+  vertical-align: text-top;
+  font-size: 25px;
 }
 
 /* ____________________TIMER PIE CSS________________________________ */
