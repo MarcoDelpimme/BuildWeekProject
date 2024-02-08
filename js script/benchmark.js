@@ -118,6 +118,9 @@ const correct = [];
 function questionStep() {
   const obj = questions[indexQuestion];
   container.innerHTML = "";
+  const questionCounter = document.getElementById("question-counter");
+  questionCounter.innerText = `Question ${indexQuestion + 1}/${questions.length}`;
+
   const question = document.createElement("div");
   question.classList.add("divpg2");
   question.innerText = obj.question;
@@ -156,7 +159,7 @@ function shuffleQuestion(array) {
 
 //FUNZIONE CHIAMATA QUANDO SI PASSA ALLA PROSSIMA DOMANDA
 function nextQuestion() {
-  let selectedAnswer = null;
+  let selectedAnswer = null; //utilizzo null per tenere traccia della risposta attualmente selezionata durante il quiz qui inizialmente nessuna risposta è selezionata
   indexQuestion++;
   quizCompleted = false;
   currentSelectedAnswer = null;
@@ -178,6 +181,8 @@ function nextQuestion() {
     timer.style.display = "none";
     const buttonNext = document.getElementById("next-question-btn");
     buttonNext.style.display = "none";
+    const counter = document.getElementById("question-counter");
+    counter.style.display = "none";
     lastPage.innerHTML = `<canvas id="chartId" aria-label="chart" height="350" width="580"></canvas>`;
     clearInterval(timerInterval);
     generatePieChart();
@@ -204,6 +209,7 @@ function selectAnswer(option, button) {
     return;
   }
 
+  //questa condizione verifica che la risposta szelezionata non è  null esegue il codice all'interno
   if (currentSelectedAnswer !== null) {
     const prevSelectedButton = Array.from(document.querySelectorAll(".inputpg2")).find(
       (btn) => btn.innerText === currentSelectedAnswer
@@ -225,6 +231,7 @@ function cleanse() {
   });
 }
 //FUNZIONE PER REGISTRARE I DATI DELLA RISPOSTA DATA DALL'UTENTE
+//IN QUESTA FUNZIONE NULL VIENE PASSAATO COME ARGOMENTO QUANDO LA FUNZIONE VIENE CHIAMATA PERCHè DEVE GESTIRE IL CASO IN CUI NON VIENE SELEZIONATO NESSUNA RISPOSTA MI SERVE PER INDICARE CHE LA VARIABILE è INIZIALMENTE VUOTA O NON è ANCORA DEFINITA IN UN DETERMINATO PUNTO DEL FLUSSO
 function dataAnswer() {
   console.log("selected question", currentSelectedAnswer);
   const currentQuestion = questions[indexQuestion];
