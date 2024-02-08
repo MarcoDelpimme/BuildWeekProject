@@ -111,6 +111,8 @@ let timeLeft = THE_LIMIT; // Tempo iniziale
 let timerInterval = null; //timer
 let remainingPathColor = COLOR_CODES.info.color; //timer
 let currentSelectedAnswer = null;
+const wrong = [];
+const correct = [];
 
 //FUNZIONE PER GESTIRE GLI STEP DI UNA DOMANDA PER DOMANDA
 function questionStep() {
@@ -157,9 +159,9 @@ function nextQuestion() {
   let selectedAnswer = null;
   indexQuestion++;
   quizCompleted = false;
+  currentSelectedAnswer = null;
   if (indexQuestion < questions.length) {
     dataAnswer(selectedAnswer);
-    selectedAnswer = null;
     questionStep();
     clearInterval(timerInterval);
     timePassed = 0;
@@ -195,8 +197,6 @@ nextQuestionBtn.addEventListener("click", function () {
 });
 
 //ARRAY PER REGISTRARE LE RISPOSTE CORRETTE O SCORRETTE
-const wrong = [];
-const correct = [];
 
 //FUNZIONE CHIAMATA QUANDO SI SELEZIONA UNA RISPOSTA
 function selectAnswer(option, button) {
