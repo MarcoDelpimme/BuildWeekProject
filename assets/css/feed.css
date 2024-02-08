@@ -48,15 +48,16 @@ button a {
 }
 
 p {
-  font-size: 26px;
+  font-size: 35px;
   color: white;
-  font-family: "Inter", sans-serif;
+  font-family: "Outfit", sans-serif;
   line-height: 34px;
   margin-top: 15px;
 }
 
 .container {
   text-align: center;
+  margin-top: 5em;
 }
 
 #comment {

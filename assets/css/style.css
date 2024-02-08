@@ -104,7 +104,7 @@ ul {
 /* PAGE2 */
 
 .divpg2 {
-  font-size: 65px;
+  font-size: 55px;
   color: white;
   font-family: "Inter", sans-serif;
   font-weight: 700;
@@ -113,11 +113,13 @@ ul {
 .divInputPg2 {
   display: inline-block;
   width: 50%;
+  margin-right: -3em;
+  margin-left: -2em;
 }
 
 #container-questions {
   text-align: center;
-  margin-block: 12rem;
+  margin-block: 8rem;
   font-size: 50px;
   color: white;
   font-family: "outfit", sans-serif;
@@ -140,6 +142,8 @@ ul {
   border-radius: 30px;
   border-style: outset;
   width: 50%;
+  padding-block: 15px;
+  font-size: 20px;
 }
 
 .inputpg2:hover {
@@ -243,4 +247,106 @@ ul {
 
 #app {
   text-align: -webkit-right;
+}
+
+/* ------------------------ */
+
+#titolo-result {
+  text-align: center;
+  font-weight: bold;
+}
+
+#titolo-result h1 {
+  font-weight: 700;
+}
+
+#sottotitolo {
+  text-align: center;
+  color: white;
+  margin-top: -45px;
+  margin-bottom: 50px;
+  font-family: "Outfit", sans-serif;
+}
+
+#sottotitolo h2 {
+  font-weight: 300;
+}
+
+#lastpage {
+  text-align: -webkit-center;
+}
+
+#result-message {
+  margin-top: -12em;
+  text-align: center;
+}
+
+#corretto {
+  margin-top: -80px;
+  margin-left: 20em;
+}
+
+#corretto p {
+  font-size: 55px;
+  font-family: "Outfit", sans-serif;
+}
+
+#sbagliato {
+  text-align: right;
+  margin-top: -77px;
+  margin-right: 20em;
+}
+
+#sbagliato p {
+  font-size: 55px;
+  font-family: "Outfit", sans-serif;
+}
+
+.wrongpercent {
+  color: white;
+  text-align: right;
+  margin-top: -11px;
+  font-size: 30px;
+  margin-left: 65px;
+  font-size: 70px;
+  font-family: "Outfit", sans-serif;
+  font-weight: bold;
+  margin-right: 300px;
+}
+
+.correctpercent {
+  color: white;
+  margin-top: -10px;
+  font-size: 30px;
+  position: absolute;
+  color: white;
+  margin-left: 65px;
+  font-size: 70px;
+  font-family: "Outfit", sans-serif;
+  font-weight: bold;
+  margin-left: 360px;
+}
+
+#container-btn2 {
+  margin-top: 9em;
+  text-align: center;
+}
+
+#container-btn2 a {
+  text-decoration: none;
+}
+
+.btnpage2 {
+  margin-inline: auto;
+  padding-block: 18px;
+  padding-inline: 70px;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 700;
+  display: block;
+  margin-top: 60px;
+  font-size: large;
+  color: white;
+  border: 3px solid white;
+  box-shadow: 0px 0px 10px 0.5px #00ffff78;
 }

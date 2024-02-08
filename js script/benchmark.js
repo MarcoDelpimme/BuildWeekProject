@@ -252,6 +252,7 @@ function onTimesUp() {
   dataAnswer(null);
 }
 //FUNZIONE CHE GENERA IL GRAFICO A TORTA ALLA FINE DEL QUIZ NEL ELSE DELLA FUNZIONE NEXTQUESTION
+
 function generatePieChart() {
   const totalQuestions = questions.length;
   const answeredQuestions = correct.length + wrong.length;
@@ -266,7 +267,8 @@ function generatePieChart() {
     const p = document.createElement("p");
 
     p.innerText = "Hai fallito il test";
-    p.style.color = "red";
+    p.style.color = "#df3232";
+    p.style.fontFamily = "Outfit";
 
     containerResult.appendChild(p);
   } else {
@@ -274,19 +276,47 @@ function generatePieChart() {
     const p = document.createElement("p");
 
     p.innerText = "Hai superato il test";
-    p.style.color = "green";
+    p.style.color = "#00ffff";
 
     containerResult.appendChild(p);
   }
+
+  // creazione titolo
+  const divTitoloResult = document.getElementById("titolo-result");
+  const h1 = document.createElement("h1");
+  h1.innerText = "Results";
+  divTitoloResult.appendChild(h1);
+
+  // creazione sottotitolo
+  const divSottotitolo = document.getElementById("sottotitolo");
+  const h2 = document.createElement("h2");
+  h2.innerText = "The summary of your answers:";
+  divSottotitolo.appendChild(h2);
+
+  // creazione div "corrette"
+  const divCorrette = document.getElementById("corretto");
+  const p = document.createElement("p");
+  p.innerText = "Correct";
+  divCorrette.appendChild(p);
+
+  // creazione div "sbagliate"
+  const divSbagliate = document.getElementById("sbagliato");
+  const pWrong = document.createElement("p");
+  pWrong.innerText = "Wrong";
+  divSbagliate.appendChild(pWrong);
+
   const percentualecorrette = document.getElementById("percentualecorrette");
-  percentualecorrette.innerHTML = "CORRETTE" + " " + correctPercentage + "%";
+
+  percentualecorrette.innerHTML = correctPercentage + "%";
   percentualecorrette.style.color = "white";
   percentualecorrette.classList.add("correctpercent");
 
   const percentualescorrette = document.getElementById("percentualescorrette");
-  percentualescorrette.innerHTML = "SBAGLIATE" + " " + realPercentageWrong + "%";
+  percentualescorrette.innerHTML = realPercentageWrong + "%";
   percentualescorrette.style.color = "white";
   percentualescorrette.classList.add("wrongpercent");
+
+  // -----------------------------
 
   const buttonpage2 = document.getElementById("container-btn2");
   const buttonInput = document.createElement("button");
@@ -302,11 +332,10 @@ function generatePieChart() {
   var chartId = new Chart(chrt, {
     type: "doughnut",
     data: {
-      labels: ["SBAGLIATE", "CORRETTE"],
       datasets: [
         {
           data: [realPercentageWrong, correctPercentage],
-          backgroundColor: ["red", "green"],
+          backgroundColor: ["#c2128d", "#00ffff"],
           hoverOffset: 5,
         },
       ],
