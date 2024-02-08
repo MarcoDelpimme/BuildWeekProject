@@ -79,6 +79,7 @@ ul {
 .container-checkbox p {
   display: inline-block;
   font-weight: 700;
+  margin-bottom: 35px;
 }
 
 .container-btn1 {
@@ -348,4 +349,28 @@ ul {
   color: white;
   border: 3px solid white;
   box-shadow: 0px 0px 10px 0.5px #00ffff78;
+}
+
+.checkbox {
+  width: 26px;
+  height: 25px;
+  border: 2px solid violet;
+  border-radius: 5px;
+  appearance: none;
+  margin-bottom: -6px;
+}
+
+.checkbox:checked {
+  background-color: cyan;
+}
+
+.label {
+  font-size: 16px;
+  margin-left: 10px;
+  color: #706a6a;
+}
+
+.checkbox:checked + label {
+  color: #6c63ff;
+  font-weight: bold;
 }
