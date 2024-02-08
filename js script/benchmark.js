@@ -184,6 +184,9 @@ function nextQuestion() {
     const counter = document.getElementById("question-counter");
     counter.style.display = "none";
     lastPage.innerHTML = `<canvas id="chartId" aria-label="chart" height="350" width="580"></canvas>`;
+    const resultCounter = document.getElementById("result-counter");
+    resultCounter.innerHTML = `<p>Correct Answers: <span id="correct-count">0</span></p>
+    <p>Incorrect Answers: <span id="incorrect-count">0</span></p>`;
     clearInterval(timerInterval);
     generatePieChart();
     wrong.length = 0;
@@ -267,7 +270,8 @@ function onTimesUp() {
     };
     wrong.push(unansweredData);
   }
-
+  correctCountElement.innerText = correct.length;
+  incorrectCountElement.innerText = wrong.length;
   nextQuestion();
 }
 //FUNZIONE CHE GENERA IL GRAFICO A TORTA ALLA FINE DEL QUIZ NEL ELSE DELLA FUNZIONE NEXTQUESTION
@@ -281,6 +285,14 @@ function generatePieChart() {
   const wrongPercentage = (wrong.length / totalQuestions) * 100;
 
   const realPercentageWrong = (unansweredQuestions / totalQuestions) * 100 + (wrong.length / totalQuestions) * 100;
+
+  //counter finale-------------------------------
+  const correctCountElement = document.getElementById("correct-count");
+  const incorrectCountElement = document.getElementById("incorrect-count");
+
+  correctCountElement.innerText = correct.length;
+  incorrectCountElement.innerText = wrong.length;
+  //-----------------------------------------------
   if (correctPercentage <= 60) {
     const containerResult = document.getElementById("result-message");
     const p = document.createElement("p");
