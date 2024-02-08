@@ -80,6 +80,7 @@ ul {
 .container-checkbox p {
   display: inline-block;
   font-weight: 700;
+  margin-bottom: 35px;
 }
 
 .container-btn1 {
@@ -364,4 +365,25 @@ ul {
   font-family: "Outfit", sans-serif;
   font-weight: 400;
   text-decoration: overline;
+  width: 26px;
+  height: 25px;
+  border: 2px solid violet;
+  border-radius: 5px;
+  appearance: none;
+  margin-bottom: -6px;
+}
+
+.checkbox:checked {
+  background-color: cyan;
+}
+
+.label {
+  font-size: 16px;
+  margin-left: 10px;
+  color: #706a6a;
+}
+
+.checkbox:checked + label {
+  color: #6c63ff;
+  font-weight: bold;
 }
