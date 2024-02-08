@@ -97,9 +97,9 @@ const COLOR_CODES = {
   },
 };
 //LIMITE DI TEMPO PER IL TIMER
-const THE_LIMIT = 60; //timer
+const THE_LIMIT = 10; //timer
 //LIMIT TEMPO COMPLESSIVO DEL QUIZ
-const TIME_LIMIT = 60; //timer
+const TIME_LIMIT = 10; //timer
 //OTTENGO  IL CONTAINER DELLE DOMANDE + RISP DA INSERIRE
 const container = document.getElementById("container-questions"); //container question
 //___________________________
@@ -159,12 +159,11 @@ function shuffleQuestion(array) {
 
 //FUNZIONE CHIAMATA QUANDO SI PASSA ALLA PROSSIMA DOMANDA
 function nextQuestion() {
-  let selectedAnswer = null; //utilizzo null per tenere traccia della risposta attualmente selezionata durante il quiz qui inizialmente nessuna risposta è selezionata
   indexQuestion++;
   quizCompleted = false;
   currentSelectedAnswer = null;
   if (indexQuestion < questions.length) {
-    dataAnswer(selectedAnswer);
+    dataAnswer();
     questionStep();
     clearInterval(timerInterval);
     timePassed = 0;
@@ -193,14 +192,22 @@ function nextQuestion() {
     correct.length = 0;
   }
   if (!quizCompleted) {
-    dataAnswer(null);
+    dataAnswer();
   }
 }
 
 //GESTIONE DEL CLICK SUL PULSANTE PROSSIMA DOMANDA
 const nextQuestionBtn = document.getElementById("next-question-btn");
 nextQuestionBtn.addEventListener("click", function () {
-  dataAnswer(null);
+  if (currentSelectedAnswer === null) {
+    const answerData = {
+      question: questions[indexQuestion].question,
+      selectedQuestion: null,
+      correct_answer: questions[indexQuestion].correct_answer,
+    };
+    wrong.push(answerData);
+  }
+  dataAnswer();
   nextQuestion();
 });
 
@@ -270,8 +277,7 @@ function onTimesUp() {
     };
     wrong.push(unansweredData);
   }
-  correctCountElement.innerText = correct.length;
-  incorrectCountElement.innerText = wrong.length;
+
   nextQuestion();
 }
 //FUNZIONE CHE GENERA IL GRAFICO A TORTA ALLA FINE DEL QUIZ NEL ELSE DELLA FUNZIONE NEXTQUESTION
@@ -452,9 +458,10 @@ function startTimer() {
     }
   }, 1000);
 }
-
-startTimer(); //AVVIO IL TIMER ALL INIZIO DEL QUIZ
-questionStep(); //PARTE LA PRESENZATIONE CON LA PRIMA DOMANDA
-//IMPOSTAZIONE DEL COLORE DEL PERCORSO RIMANENTE
-setRemainingPathColor(timeLeft);
-setCircleDasharray();
+window.onload = function () {
+  startTimer(); //AVVIO IL TIMER ALL INIZIO DEL QUIZ
+  questionStep(); //PARTE LA PRESENZATIONE CON LA PRIMA DOMANDA
+  //IMPOSTAZIONE DEL COLORE DEL PERCORSO RIMANENTE
+  setRemainingPathColor(timeLeft);
+  setCircleDasharray();
+};
