@@ -188,11 +188,6 @@ function nextQuestion() {
     <p>Incorrect Answers: <span id="incorrect-count">0</span></p>`;
     clearInterval(timerInterval);
     generatePieChart();
-    wrong.length = 0;
-    correct.length = 0;
-  }
-  if (!quizCompleted) {
-    dataAnswer();
   }
 }
 
