@@ -104,17 +104,18 @@ const TIME_LIMIT = 20; //timer
 const container = document.getElementById("container-questions"); //container question
 //___________________________
 // DICHIARO VARIABILI DI STATO PER GESTIRE LO STATO DEL QUIZ E DEL TIMER
-let indexQuestion = 0;
-let quizCompleted = false;
-let timePassed = 0; //timer
+let indexQuestion = 0; //INDICE DELLA DOMANDA CORRENTE
+let quizCompleted = false; //QUESTA è LA FLAG CHE INDICA CHE IL QUIZ è COMPLETATO
+let timePassed = 0; //TEMPO TRASCORSO
 let timeLeft = THE_LIMIT; // Tempo iniziale
 let timerInterval = null; //timer
 let remainingPathColor = COLOR_CODES.info.color; //timer
 let currentSelectedAnswer = null;
-const wrong = [];
-const correct = [];
+const wrong = []; //ARRAY DOVE FINISCO LE RISPOSTE SBAGLIATE CON LA DOMANDA + LA RISPOSTA SELEZIONATA
+const correct = []; //ARRAY DOVE FINISCONO LE RISPOSTE CORRETTE CON LA DOMANDA + LA RISPOSTA SELEZIONATA
 
 //FUNZIONE PER GESTIRE GLI STEP DI UNA DOMANDA PER DOMANDA
+//IMPLEMENTAZIONE/CREAZIONE DELLA PRESENTAZIONE DI UNA SOLA DOMANDA PER VOLTA
 function questionStep() {
   const obj = questions[indexQuestion];
   container.innerHTML = "";
@@ -150,6 +151,7 @@ function questionStep() {
   });
 }
 //FUNZIONE PER MESCOLARE LE DOMANDE (RANDOMIZZAZIONE TRAMITE SHUFFLE)
+//ALGORITMO DELLO SHUFFLE
 function shuffleQuestion(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
