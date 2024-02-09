@@ -10,7 +10,7 @@ body {
 
 header {
   height: 80px;
-  margin-bottom: 4rem;
+  margin-bottom: 0rem;
 }
 
 #logosvg {
@@ -130,7 +130,7 @@ ul {
   font-size: 50px;
   color: white;
   font-family: "outfit", sans-serif;
-  margin-bottom: 70px;
+  margin-block: 70px;
 }
 
 .inputpg2 {
@@ -372,11 +372,30 @@ ul {
 }
 
 #question-counter {
-  color: rgb(253 121 255);
+  color: rgb(229, 22, 233);
   text-align: center;
   font-family: "Outfit", sans-serif;
   font-weight: 400;
   text-decoration: overline;
+  padding-top: 60px;
+}
+#result-counter {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 75px;
+  padding-left: 80px;
+}
+#result-counter p {
+  font-weight: bold;
+  margin: 5px;
+  border: 2px solid;
+  border-inline: 0px;
+}
+#incorrect-count {
+  color: #ff00b3;
+}
+#correct-count {
+  color: aqua;
 }
 
 .checkbox {

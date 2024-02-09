@@ -185,7 +185,7 @@ function nextQuestion() {
     lastPage.innerHTML = `<canvas id="chartId" aria-label="chart" height="350" width="580"></canvas>`;
     const resultCounter = document.getElementById("result-counter");
     resultCounter.innerHTML = `<p>Correct Answers: <span id="correct-count">0</span></p>
-    <p>Incorrect Answers: <span id="incorrect-count">0</span></p>`;
+    <p>Wrong Answers: <span id="incorrect-count">0</span></p>`;
     clearInterval(timerInterval);
     generatePieChart();
   }
@@ -294,16 +294,16 @@ function generatePieChart() {
   correctCountElement.innerText = correct.length;
   incorrectCountElement.innerText = wrong.length;
   //-----------------------------------------------
-  if (correctPercentage <= 60) {
+  if (correctPercentage < 60) {
     const containerResult = document.getElementById("result-message");
     const p = document.createElement("p");
     p.innerText = "I'M SORRY ";
-    p.style.color = "white";
+    p.style.color = "#df3232";
     p.style.fontFamily = "Outfit";
 
     const p2 = document.createElement("p");
     p2.innerText = "you failed the test";
-    p2.style.color = "#df3232";
+    p2.style.color = "white";
     p2.style.fontFamily = "Outfit";
 
     containerResult.appendChild(p);
@@ -378,7 +378,7 @@ function generatePieChart() {
         {
           data: [realPercentageWrong, correctPercentage],
           backgroundColor: ["#c2128d", "#00ffff"],
-          hoverOffset: 5,
+          hoverOffset: 2,
         },
       ],
     },
