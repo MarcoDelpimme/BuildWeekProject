@@ -1,0 +1,423 @@
+body {
+  margin-inline: 10rem;
+  padding: 0;
+  box-sizing: border-box;
+  background-image: url(/assets/bg.jpg);
+  background-repeat: repeat;
+  background-size: cover;
+  height: 100vh;
+}
+
+header {
+  height: 80px;
+  margin-bottom: 0rem;
+}
+
+#logosvg {
+  width: 15rem;
+  padding-top: 2rem;
+  padding-bottom: 4rem;
+}
+
+/* GENERAL STYLE */
+h1 {
+  font-family: "Outfit", sans-serif;
+  font-size: 60px;
+  color: #ffffff;
+  font-weight: normal;
+}
+
+p {
+  font-size: 16px;
+  color: white;
+  font-family: "Inter", sans-serif;
+  line-height: 22px;
+}
+
+ul {
+  font-size: 16px;
+  color: white;
+  font-family: "Inter", sans-serif;
+}
+
+/* TITLES AND HEADER */
+
+.container-titles {
+  line-height: 52px;
+}
+
+.title-bold {
+  font-weight: bold;
+}
+
+.instructions {
+  font-size: 25px;
+  color: #c2128d;
+  font-family: "Outfit", sans-serif;
+  padding-right: 17rem;
+}
+
+.instructions h2 {
+  margin-bottom: -8px;
+}
+
+.list-ons {
+  font-size: 16px;
+  color: white;
+  padding-top: 35px;
+  line-height: 33px;
+  padding-left: 17px;
+}
+
+.list-ons span {
+  font-weight: 800;
+}
+
+.container-checkbox {
+  margin-top: 8rem;
+}
+
+.container-checkbox p {
+  display: inline-block;
+  font-weight: 700;
+  margin-bottom: 35px;
+}
+
+.container-btn1 {
+  display: inline-block;
+  width: 125%;
+  text-align: center;
+}
+.container-btn1 a {
+  text-decoration: none;
+  color: #0b113b;
+}
+
+.button-page1 {
+  margin-left: 18rem;
+  padding-block: 18px;
+  padding-inline: 55px;
+  font-size: 25px;
+  cursor: pointer;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0px 0px 22px 1px cyan;
+}
+
+.attemptions {
+  color: #ff00b3;
+  font-family: "Outfit", sans-serif;
+  font-weight: 700;
+}
+
+/* PAGE2 */
+
+.divpg2 {
+  font-size: 55px;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  padding-bottom: 50px;
+}
+.divInputPg2 {
+  display: inline-block;
+  width: 35%;
+}
+
+#container-questions {
+  text-align: center;
+  margin-block: 8rem;
+  font-size: 50px;
+  color: white;
+  font-family: "outfit", sans-serif;
+  margin-block: 70px;
+}
+
+.inputpg2 {
+  color: white;
+  border: solid white;
+  padding-inline: 10px;
+  margin: 10px;
+  border: solid 3px;
+  padding: 10px;
+
+  transition-duration: 0.3s;
+  cursor: pointer;
+  background-color: #ffffff33;
+  font-family: "Outfit", sans-serif;
+  margin-inline: 10px;
+  border-radius: 30px;
+  border-style: outset;
+  width: 90%;
+  padding-block: 15px;
+  font-size: 30px;
+}
+
+.inputpg2:hover {
+  background-color: #c2128d;
+}
+
+.formpg2 {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: stretch;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+#next-question-btn {
+  color: white;
+  border: solid white;
+  padding-inline: 10px;
+  margin: 10px;
+  border: solid 3px;
+  padding: 10px;
+  transition-duration: 0.3s;
+  cursor: pointer;
+  background-color: #ffffff33;
+  font-family: "Outfit", sans-serif;
+  margin-inline: 10px;
+  border-style: outset;
+  width: 20%;
+  margin-left: 80%;
+  font-size: 17px;
+}
+
+#next-question-btn:hover {
+  background-color: rgba(77, 9, 77, 0.192);
+}
+
+.material-symbols-outlined {
+  vertical-align: text-top;
+  font-size: 25px;
+}
+
+/* ____________________TIMER PIE CSS________________________________ */
+#timer {
+  color: white;
+}
+
+#base-time-label {
+  color: white;
+}
+
+.base-timer {
+  position: relative;
+  width: 130px;
+  height: 130px;
+  color: white;
+  font-family: "Inter", sans-serif;
+  font-weight: bold;
+}
+
+.base-timer__svg {
+  transform: scaleX(-1);
+}
+
+.base-timer__circle {
+  fill: none;
+  stroke: none;
+}
+
+.base-timer__path-elapsed {
+  stroke-width: 10px;
+  stroke: grey;
+}
+
+.base-timer__path-remaining {
+  stroke-width: 7px;
+  stroke-linecap: round;
+  transform: rotate(90deg);
+  transform-origin: center;
+  transition: 1s linear all;
+  fill-rule: nonzero;
+  stroke: currentColor;
+}
+
+.base-timer__path-remaining.green {
+  color: rgb(65, 184, 131);
+}
+
+.base-timer__path-remaining.orange {
+  color: orange;
+}
+
+.base-timer__path-remaining.red {
+  color: red;
+}
+
+.base-timer__label {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  top: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 35px;
+}
+
+#app {
+  text-align: -webkit-right;
+}
+
+/* ------------------------ */
+
+#titolo-result {
+  text-align: center;
+  font-weight: bold;
+}
+
+#titolo-result h1 {
+  font-weight: 700;
+}
+
+#sottotitolo {
+  text-align: center;
+  color: white;
+  margin-top: -45px;
+  margin-bottom: 40px;
+  font-family: "Outfit", sans-serif;
+}
+
+#sottotitolo h2 {
+  font-weight: 300;
+}
+
+#lastpage {
+  text-align: -webkit-center;
+}
+
+#result-message {
+  margin-top: -13em;
+  text-align: center;
+}
+#result-message p {
+  font-size: 15px;
+  font-weight: bold;
+  line-height: 15px;
+  margin-bottom: -10px;
+}
+
+#corretto {
+  margin-top: -80px;
+  margin-left: 3em;
+}
+
+#corretto p {
+  font-size: 55px;
+  font-family: "Outfit", sans-serif;
+}
+
+#sbagliato {
+  text-align: right;
+  margin-top: -80px;
+  margin-right: 5em;
+}
+
+#sbagliato p {
+  font-size: 55px;
+  font-family: "Outfit", sans-serif;
+}
+
+.wrongpercent {
+  color: white;
+  text-align: right;
+  margin-top: -40px;
+  font-size: 30px;
+  margin-left: 65px;
+  font-size: 70px;
+  font-family: "Outfit", sans-serif;
+  font-weight: bold;
+  margin-right: 75px;
+}
+
+.correctpercent {
+  color: white;
+  margin-top: -40px;
+  font-size: 30px;
+  position: absolute;
+  color: white;
+  margin-left: 65px;
+  font-size: 70px;
+  font-family: "Outfit", sans-serif;
+  font-weight: bold;
+  margin-left: 100px;
+}
+
+#container-btn2 {
+  margin-top: 9em;
+  text-align: center;
+}
+
+#container-btn2 a {
+  text-decoration: none;
+}
+
+.btnpage2 {
+  margin-inline: auto;
+  padding-block: 18px;
+  padding-inline: 70px;
+  background-color: transparent;
+  cursor: pointer;
+  font-weight: 700;
+  display: block;
+  margin-top: 60px;
+  font-size: large;
+  color: white;
+  border: 3px solid white;
+  box-shadow: 0px 0px 10px 0.5px #00ffff78;
+}
+
+#question-counter {
+  color: rgb(229, 22, 233);
+  text-align: center;
+  font-family: "Outfit", sans-serif;
+  font-weight: 400;
+  text-decoration: overline;
+  padding-top: 60px;
+}
+#result-counter {
+  display: flex;
+  justify-content: space-between;
+  padding-inline: 75px;
+  padding-left: 80px;
+}
+#result-counter p {
+  font-weight: bold;
+  margin: 5px;
+  border: 2px solid;
+  border-inline: 0px;
+}
+#incorrect-count {
+  color: #ff00b3;
+}
+#correct-count {
+  color: aqua;
+}
+
+.checkbox {
+  width: 26px;
+  height: 25px;
+  border: 2px solid violet;
+  border-radius: 5px;
+  appearance: none;
+  margin-bottom: -6px;
+}
+
+.checkbox:checked {
+  background-color: cyan;
+}
+
+.label {
+  font-size: 16px;
+  margin-left: 10px;
+  color: #706a6a;
+}
+
+.checkbox:checked + label {
+  color: #6c63ff;
+  font-weight: bold;
+}
