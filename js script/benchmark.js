@@ -97,9 +97,9 @@ const COLOR_CODES = {
   },
 };
 //LIMITE DI TEMPO PER IL TIMER
-const THE_LIMIT = 10; //timer
+const THE_LIMIT = 20; //timer
 //LIMIT TEMPO COMPLESSIVO DEL QUIZ
-const TIME_LIMIT = 10; //timer
+const TIME_LIMIT = 20; //timer
 //OTTENGO  IL CONTAINER DELLE DOMANDE + RISP DA INSERIRE
 const container = document.getElementById("container-questions"); //container question
 //___________________________
@@ -188,11 +188,6 @@ function nextQuestion() {
     <p>Incorrect Answers: <span id="incorrect-count">0</span></p>`;
     clearInterval(timerInterval);
     generatePieChart();
-    wrong.length = 0;
-    correct.length = 0;
-  }
-  if (!quizCompleted) {
-    dataAnswer();
   }
 }
 
