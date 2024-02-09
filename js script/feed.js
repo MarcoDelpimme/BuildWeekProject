@@ -25,7 +25,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
 
-    // ---------------------
     svgElement.addEventListener("mouseout", function () {
       if (selectedRating === 0) {
         let stars = Array.from(starsFeed.querySelectorAll(".star"));
@@ -55,4 +54,25 @@ document.addEventListener("DOMContentLoaded", function () {
     let star = createStar(i);
     starsFeed.appendChild(star);
   }
+
+  function storeComment() {
+    let commentInput = document.getElementById("comment");
+    let commentText = commentInput.value;
+    let feedback = {
+      comment: commentText,
+      stars: selectedRating,
+    };
+
+    let feedbackJSON = JSON.stringify(feedback);
+    let feedbackElement = document.createElement("p");
+    feedbackElement.textContent = feedbackJSON;
+    commentInput.value = "";
+    selectedRating = 0;
+
+    console.log("Feed text:", feedback.comment);
+    console.log("Feed Stars:", feedback.stars);
+  }
+
+  let submitButton = document.getElementById("subButton");
+  submitButton.addEventListener("click", storeComment);
 });
